@@ -7,9 +7,11 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <typeAliases>
-        <!--dto-->
+        <package name="com.CookingMama.dev.domain.dto"/>
+        <package name="com.CookingMama.dev.domain.request"/>
+        <package name="com.CookingMama.dev.domain.response"/>
     </typeAliases>
     <mappers>
-        <!--mapper-->
+        <mapper resource="mybatis/mapper/userMapper.xml" />
     </mappers>
 </configuration>
