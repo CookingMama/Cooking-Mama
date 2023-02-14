@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-@Slf4j
 public class UserController {
     private final UserService userService;
     private final SecurityService securityService;
@@ -27,7 +26,6 @@ public class UserController {
 
     @PostMapping("/signup")
     public UserResponse userSignup(@RequestBody SignupRequest request){
-        log.info(request.toString());
         return userService.userSignup(request);
     }
 
@@ -36,7 +34,7 @@ public class UserController {
         String token = securityService.getToken();
         return userService.userInfo(securityService.tokenToDTO(token).getId());
     }
-    @PostMapping("/my-page")
+    @PutMapping("/my-page")
     public Integer updateUser(@RequestBody SignupRequest request){
         String token = securityService.getToken();
         UserUpdateRequest userUpdateRequest = new UserUpdateRequest(securityService.tokenToDTO(token).getId(), request);
