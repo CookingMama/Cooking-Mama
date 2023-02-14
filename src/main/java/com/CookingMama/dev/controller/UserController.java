@@ -6,6 +6,7 @@ import com.CookingMama.dev.domain.request.AddHeartsRequest;
 import com.CookingMama.dev.domain.request.LoginRequest;
 import com.CookingMama.dev.domain.request.SignupRequest;
 import com.CookingMama.dev.domain.request.UserUpdateRequest;
+import com.CookingMama.dev.domain.response.ItemListResponse;
 import com.CookingMama.dev.domain.response.HeartsResponse;
 import com.CookingMama.dev.domain.response.UserResponse;
 import com.CookingMama.dev.security.SecurityService;
@@ -28,6 +29,10 @@ public class UserController {
     private final SecurityService securityService;
     private final HeartsService heartsService;
 
+    @GetMapping
+    public List<ItemListResponse> getAllItem(){
+        return userService.getAllItems();
+    }
     @PostMapping("/login")
     public UserResponse userLogin(@RequestBody LoginRequest request){
         return userService.userLogin(request);

@@ -1,20 +1,28 @@
 package com.CookingMama.dev.service;
 
+import com.CookingMama.dev.domain.dto.Items;
 import com.CookingMama.dev.domain.dto.UserDTO;
 import com.CookingMama.dev.domain.request.LoginRequest;
 import com.CookingMama.dev.domain.request.SignupRequest;
 import com.CookingMama.dev.domain.request.UserUpdateRequest;
+import com.CookingMama.dev.domain.response.ItemListResponse;
 import com.CookingMama.dev.domain.response.UserResponse;
 import com.CookingMama.dev.repository.UserRepository;
 import com.CookingMama.dev.security.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final SecurityService securityService;
+
+    public List<ItemListResponse> getAllItems(){
+        return userRepository.getAllItem();
+    }
 
     public UserResponse userSignup(SignupRequest request){
         Integer SignupRow = userRepository.userSignup(request);

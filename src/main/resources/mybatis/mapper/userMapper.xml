@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.CookingMama.dev.repository.UserRepository">
+    <select id="getAllItem" resultType="ItemListResponse">
+        SELECT
+        i.id, i.item_image, i.item_name, a.admin_name, c.category_name, i.item_price
+        FROM items AS i
+        LEFT JOIN admin AS a ON i.admin_id = a.id
+        LEFT JOIN category AS c ON i.category = c.id
+    </select>
     <insert id="userSignup" useGeneratedKeys="true" keyColumn="id">
         INSERT INTO user
         (user_email, user_pw, user_name, user_phone_number, user_birth, user_address, user_address_detail, user_zipcode)
