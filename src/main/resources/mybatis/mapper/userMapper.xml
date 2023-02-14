@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.CookingMama.dev.repository.UserRepository">
+    <insert id="userSignup" useGeneratedKeys="true" keyColumn="id">
+        INSERT INTO user
+        (user_email, user_pw, user_name, user_phone_number, user_birth, user_address, user_address_detail, user_zipcode)
+        VALUES 
+        (#{userEmail}, #{userPw}, #{userName}, #{userPhoneNumber}, #{userBirth}, #{userAddress}, #{userAddressDetail}, #{userZipcode})
+    </insert>
+    <select id="userLogin" resultType="UserDTO">
+        SELECT
+        id, user_email, user_pw, user_name, user_birth, user_address, user_address_detail, user_zipcode, user_phone_number
+        FROM user
+        WHERE user_email = #{userEmail} AND user_pw = #{userPw}
+    </select>
+</mapper>

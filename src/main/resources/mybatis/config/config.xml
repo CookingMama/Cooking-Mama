@@ -15,5 +15,6 @@
     <mappers>
         <!--mapper-->
         <mapper resource="mybatis/mapper/ItemRegistMapper.xml"/>
+        <mapper resource="mybatis/mapper/userMapper.xml" />
     </mappers>
 </configuration>
