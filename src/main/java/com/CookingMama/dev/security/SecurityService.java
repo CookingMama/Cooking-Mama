@@ -31,12 +31,8 @@ public class SecurityService {
         Key key = new SecretKeySpec(secretKeyByte, signatureAlgorithm.getJcaName());
         Map<String, Object> map = new HashMap<>();
         map.put("id", userDTO.getId());
+        map.put("userEmail", userDTO.getUserEmail());
         map.put("userName", userDTO.getUserName());
-        map.put("userPhoneNumber", userDTO.getUserPhoneNumber());
-        map.put("userBirth", userDTO.getUserBirth());
-        map.put("userAddress", userDTO.getUserAddress());
-        map.put("userAddressDetail", userDTO.getUserAddressDetail());
-        map.put("userZipcode", userDTO.getUserZipcode());
         return Jwts.builder()
                 .setClaims(map)
                 .signWith(key)
@@ -49,7 +45,7 @@ public class SecurityService {
                 .setSigningKey(DatatypeConverter
                         .parseBase64Binary(SECRET_KEY))
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
         UserTokenInfo info = new UserTokenInfo().tokenToDTO(claims);
         return info;

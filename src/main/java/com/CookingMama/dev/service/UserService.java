@@ -3,6 +3,7 @@ package com.CookingMama.dev.service;
 import com.CookingMama.dev.domain.dto.UserDTO;
 import com.CookingMama.dev.domain.request.LoginRequest;
 import com.CookingMama.dev.domain.request.SignupRequest;
+import com.CookingMama.dev.domain.request.UserUpdateRequest;
 import com.CookingMama.dev.domain.response.UserResponse;
 import com.CookingMama.dev.repository.UserRepository;
 import com.CookingMama.dev.security.SecurityService;
@@ -29,14 +30,25 @@ public class UserService {
             String token = securityService.createUserToken(loginUser);
             return new UserResponse(
                     loginUser.getId(),
+                    loginUser.getUserEmail(),
                     loginUser.getUserName(),
-                    loginUser.getUserPhoneNumber(),
-                    loginUser.getUserBirth(),
-                    loginUser.getUserAddress(),
-                    loginUser.getUserAddressDetail(),
-                    loginUser.getUserZipcode(),
                     token
             );
+        }
+        return null;
+    }
+    public UserDTO userInfo(Integer id){
+        UserDTO userInfo = userRepository.userInfo(id);
+        if(userInfo != null){
+            return userInfo;
+        }
+        return null;
+    }
+
+    public Integer userUpdate(UserUpdateRequest request){
+        Integer updateSuccess = userRepository.updateUser(request);
+        if(updateSuccess != null){
+            return updateSuccess;
         }
         return null;
     }
