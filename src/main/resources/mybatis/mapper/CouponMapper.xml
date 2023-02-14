@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.CookingMama.dev.repository.CouponRepository">
+    <select id="checkCoupon" resultType="Coupons">
+        SELECT coupon_code FROM coupons WHERE coupon_code = #{couponCode}
+    </select>
+    <insert id="addCoupon">
+        INSERT INTO user_coupon(user_id, coupon_code)
+        VALUES (#{userId}, #{couponCode})
+    </insert>
+    <select id="selectMyCoupon" resultType="Coupons">
+        SELECT c.coupon_id, c.coupon_name, c.coupon_percentage, u.status
+        FROM coupons AS c
+        LEFT JOIN user_coupon AS u OM c.coupon_code = u.coupon_code
+        WHERE u.user_id = #{id}
+    </select>
+    <update id="useCoupon">
+        UPDATE user_coupon
+        SET status = 0
+        WHERE coupon_code = #{couponCode} AND user_id = #{userId}
+    </update>
+</mapper>

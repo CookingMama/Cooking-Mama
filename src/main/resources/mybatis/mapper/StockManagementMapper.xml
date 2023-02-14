@@ -10,4 +10,15 @@
         WHERE
             admin_id = #{adminId}
     </select>
+    <update id="stockUpdate">
+        UPDATE
+            items
+        SET
+            item_count = #{itemCount}
+        WHERE
+            id = (SELECT * FROM
+                    (SELECT id
+                    FROM items
+                    WHERE admin_id = #{adminId} AND item_name = #{itemName} AND item_option = #{itemOption} limit 1) as s)
+    </update>
 </mapper>
