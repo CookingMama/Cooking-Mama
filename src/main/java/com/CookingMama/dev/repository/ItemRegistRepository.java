@@ -9,6 +9,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface ItemRegistRepository {
-
     Integer insertItemRegist(ItemRegistRequest request);
 }
