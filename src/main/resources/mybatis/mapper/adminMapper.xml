@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.CookingMama.dev.repository.AdminRepository">
+    <insert id="adminSignUp">
+        INSERT INTO
+            admin(admin_email, admin_pw, admin_name, admin_phone_number, admin_birth)
+        VALUES
+            (#{adminEmail}, #{adminPw}, #{adminName}, #{adminPhoneNumber}, #{adminBirth})
+    </insert>
+    <select id="adminLogin" resultType="AdminDTO">
+        SELECT
+            id, admin_email, admin_pw, admin_name, admin_birth, admin_phone_number
+        FROM
+            admin
+        WHERE
+            admin_email = #{adminEmail} AND admin_pw = #{adminPw}
+    </select>
+</mapper>

@@ -1,5 +1,6 @@
 package com.CookingMama.dev.security;
 
+import com.CookingMama.dev.domain.dto.AdminDTO;
 import com.CookingMama.dev.domain.dto.UserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -55,5 +56,33 @@ public class SecurityService {
                 (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         return request.getHeader("authorization");
+    }
+
+
+    // Admin
+    public String createAdminToken(AdminDTO dto){
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
+        byte[] secretKeyByte = DatatypeConverter.parseBase64Binary(SECRET_KEY);
+        Key key = new SecretKeySpec(secretKeyByte, signatureAlgorithm.getJcaName());
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", dto.getId());
+        map.put("adminEmail", dto.getAdminEmail());
+        map.put("adminName", dto.getAdminName());
+        return Jwts.builder().setClaims(map)
+                .signWith(key)
+                .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(EXP_TIME)))
+                .compact();
+    }
+
+    public AdminTokenInfo tokenToAdminDTO(String token){
+        Claims claims = Jwts
+                .parserBuilder()
+                .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        AdminTokenInfo info = new AdminTokenInfo().tokenToDTO(claims);
+        return info;
     }
 }
