@@ -8,8 +8,13 @@
     </settings>
     <typeAliases>
         <!--dto-->
+        <package name="com.CookingMama.dev.domain.dto"/>
+        <package name="com.CookingMama.dev.domain.response"/>
+        <package name="com.CookingMama.dev.domain.request"/>
     </typeAliases>
     <mappers>
         <!--mapper-->
+        <mapper resource="mybatis/mapper/ItemRegistMapper.xml"/>
+        <mapper resource="mybatis/mapper/StockManagementMapper.xml"/>
     </mappers>
 </configuration>
