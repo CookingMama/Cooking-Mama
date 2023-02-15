@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface StockManagementRepository {
-    List<Items> stockManagement(Integer adminId);
+    List<StockManagementResponse> stockManagement(Integer adminId);
 
     Integer stockUpdate(StockUpdateRequest request);
 }

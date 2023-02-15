@@ -16,11 +16,7 @@ public class StockManagementService {
     private final StockManagementRepository stockManagementRepository;
 
     public List<StockManagementResponse> stockManagement(Integer adminId){
-        List<Items> items = stockManagementRepository.stockManagement(adminId);
-        List<StockManagementResponse> responses = items.stream()
-                .map(StockManagementResponse::new)
-                .collect(Collectors.toList());
-        return responses;
+        return stockManagementRepository.stockManagement(adminId);
     }
     
     public Integer stockUpdate(StockUpdateRequest request){
