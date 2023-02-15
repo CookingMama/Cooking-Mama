@@ -1,11 +1,11 @@
 package com.CookingMama.dev.service;
 
-import com.CookingMama.dev.domain.dto.Items;
 import com.CookingMama.dev.domain.dto.UserDTO;
 import com.CookingMama.dev.domain.request.LoginRequest;
 import com.CookingMama.dev.domain.request.SignupRequest;
 import com.CookingMama.dev.domain.request.UserUpdateRequest;
 import com.CookingMama.dev.domain.response.ItemListResponse;
+import com.CookingMama.dev.domain.response.UserItemResponse;
 import com.CookingMama.dev.domain.response.UserResponse;
 import com.CookingMama.dev.repository.UserRepository;
 import com.CookingMama.dev.security.SecurityService;
@@ -59,6 +59,9 @@ public class UserService {
             return updateSuccess;
         }
         return null;
+    }
+    public UserItemResponse getOneItem(Integer itemId){
+        return userRepository.getOneItem(itemId);
     }
 
 }

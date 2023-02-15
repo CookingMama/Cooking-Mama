@@ -33,4 +33,12 @@
         user_address_detail = #{userAddressDetail}, user_zipcode = #{userZipcode}
         WHERE id = #{id}
     </update>
+    <select id="getOneItem" resultType="UserItemResponse">
+        SELECT
+        i.id, i.item_image, i.item_name, a.admin_name, c.category_name, i.item_option, i.item_price, i.item_info, i.item_count
+        FROM items AS i
+        LEFT JOIN admin AS a ON i.admin_id = a.id
+        LEFT JOIN category AS c ON i.category = c.id
+        WHERE i.id = #{itemId}
+    </select>
 </mapper>

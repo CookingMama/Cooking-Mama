@@ -12,7 +12,7 @@
     <select id="selectMyCoupon" resultType="Coupons">
         SELECT c.coupon_id, c.coupon_name, c.coupon_percentage, u.status
         FROM coupons AS c
-        LEFT JOIN user_coupon AS u OM c.coupon_code = u.coupon_code
+        LEFT JOIN user_coupon AS u ON c.coupon_code = u.coupon_code
         WHERE u.user_id = #{id}
     </select>
     <update id="useCoupon">
