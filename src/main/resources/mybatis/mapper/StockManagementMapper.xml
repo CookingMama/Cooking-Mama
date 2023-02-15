@@ -25,4 +25,16 @@
                     FROM items
                     WHERE admin_id = #{adminId} AND item_name = #{itemName} AND item_option = #{itemOption} limit 1) as s)
     </update>
+    <update id="userAddOrder">
+        UPDATE items
+        SET item_count = item_count - #{itemCount}
+        WHERE
+        id = #{itemId}
+    </update>
+    <update id="userCancelOrder">
+            UPDATE items
+            SET item_count = item_count + #{itemCount}
+            WHERE
+            id = #{itemId}
+    </update>
 </mapper>
