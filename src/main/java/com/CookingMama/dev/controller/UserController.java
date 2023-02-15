@@ -8,6 +8,7 @@ import com.CookingMama.dev.domain.request.SignupRequest;
 import com.CookingMama.dev.domain.request.UserUpdateRequest;
 import com.CookingMama.dev.domain.response.ItemListResponse;
 import com.CookingMama.dev.domain.response.HeartsResponse;
+import com.CookingMama.dev.domain.response.UserItemResponse;
 import com.CookingMama.dev.domain.response.UserResponse;
 import com.CookingMama.dev.security.SecurityService;
 import com.CookingMama.dev.security.UserTokenInfo;
@@ -67,5 +68,10 @@ public class UserController {
         request.setUserId(userId);
         log.info(request.toString());
         return heartsService.addHearts(request);
+    }
+
+    @GetMapping("/itemdetail/{itemId}")
+    public UserItemResponse getOneItem(@PathVariable("itemId") Integer itemId){
+        return userService.getOneItem(itemId);
     }
 }

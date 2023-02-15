@@ -20,11 +20,7 @@ public class CouponController {
     @GetMapping("/coupons")
     public List<CouponListResponse> getMyCoupons(){
         String token = securityService.getToken();
-        List<CouponListResponse> myCoupon = couponService.selectMyCoupon(securityService.tokenToDTO(token).getId());
-        if(myCoupon != null){
-            return myCoupon;
-        }
-        return null;
+        return couponService.selectMyCoupon(securityService.tokenToDTO(token).getId());
     }
     @PostMapping("/coupons")
     public String addCoupon(@RequestBody AddCouponRequest couponCode){
