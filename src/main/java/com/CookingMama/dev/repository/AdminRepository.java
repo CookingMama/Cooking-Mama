@@ -4,7 +4,9 @@ import com.CookingMama.dev.domain.dto.AdminDTO;
 import com.CookingMama.dev.domain.request.AdminLoginRequest;
 import com.CookingMama.dev.domain.request.AdminSignUpRequest;
 import com.CookingMama.dev.domain.request.AdminUpdateItemRequest;
+import com.CookingMama.dev.domain.request.AdminUpdateOrderListRequest;
 import com.CookingMama.dev.domain.response.AdminItemResponse;
+import com.CookingMama.dev.domain.response.AdminOrderListResponse;
 import com.CookingMama.dev.domain.response.AdminResponse;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -21,4 +23,8 @@ public interface AdminRepository {
     List<AdminItemResponse> itemDetail(Integer adminId, Integer itemId);
 
     Integer updateItem(AdminUpdateItemRequest request);
+
+    List<AdminOrderListResponse> adminOrderList(Integer adminId);
+
+    Integer adminUpdateOrderList(AdminUpdateOrderListRequest request);
 }

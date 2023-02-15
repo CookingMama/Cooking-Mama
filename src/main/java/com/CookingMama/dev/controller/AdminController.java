@@ -4,7 +4,9 @@ import com.CookingMama.dev.domain.dto.AdminDTO;
 import com.CookingMama.dev.domain.request.AdminLoginRequest;
 import com.CookingMama.dev.domain.request.AdminSignUpRequest;
 import com.CookingMama.dev.domain.request.AdminUpdateItemRequest;
+import com.CookingMama.dev.domain.request.AdminUpdateOrderListRequest;
 import com.CookingMama.dev.domain.response.AdminItemResponse;
+import com.CookingMama.dev.domain.response.AdminOrderListResponse;
 import com.CookingMama.dev.domain.response.AdminResponse;
 import com.CookingMama.dev.security.SecurityService;
 import com.CookingMama.dev.service.AdminService;
@@ -48,5 +50,22 @@ public class AdminController {
                               @RequestBody AdminUpdateItemRequest request){
         request.setItemId(itemId);
         return adminService.updateItem(request);
+    }
+
+    @GetMapping("/orderlist")
+    public List<AdminOrderListResponse> adminOrderList(){
+        Integer adminId = securityService.tokenToAdminDTO(securityService.getToken()).getId();
+        return adminService.adminOrderList(adminId);
+    }
+
+    @PutMapping("/orderlist/{orderNumber}/{itemId}")
+    public Integer adminUpdateOrderList(@PathVariable("orderNumber") String orderNumber,
+                                        @PathVariable("itemId") Integer itemId,
+                                        @RequestBody AdminUpdateOrderListRequest request){
+        Integer adminId = securityService.tokenToAdminDTO(securityService.getToken()).getId();
+        request.setAdminId(adminId);
+        request.setOrderNumber(orderNumber);
+        request.setItemId(itemId);
+        return adminService.adminUpdateOrderList(request);
     }
 }

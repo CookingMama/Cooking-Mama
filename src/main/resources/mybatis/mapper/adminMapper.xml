@@ -48,4 +48,38 @@
         WHERE
             id = #{itemId} AND admin_id = #{adminId}
     </update>
+    <select id="adminOrderList" resultType="AdminOrderListResponse">
+        SELECT
+            o.order_number, o.order_date, c.category_name, o.admin_id, i.item_name, i.item_option, o.item_price, o.item_count, o.user_id, o.item_discount, o.item_total_price, o.status, o.tracking_number
+        FROM
+            orders as o
+        INNER JOIN
+            items as i
+        ON
+            i.id = o.item_id
+        INNER JOIN
+            category as c
+        ON
+            c.id = i.category
+        WHERE
+            o.admin_id = #{adminId}
+    </select>
+    <update id="adminUpdateOrderList" parameterType="AdminUpdateOrderListRequest">
+        UPDATE
+            orders
+        SET
+            status = #{status}, tracking_number = #{trackingNumber}
+        WHERE
+            id = (SELECT * FROM
+                    (SELECT
+                        id
+                    FROM
+                        orders
+                    WHERE
+                        admin_id = #{adminId}
+                    AND
+                        order_number = #{orderNumber}
+                    AND
+                        item_id = #{itemId}) as s);
+    </update>
 </mapper>
