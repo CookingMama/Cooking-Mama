@@ -16,4 +16,36 @@
         WHERE
             admin_email = #{adminEmail} AND admin_pw = #{adminPw}
     </select>
+    <select id="itemList" resultType="AdminItemResponse">
+        SELECT
+            c.category_name, i.item_image, i.item_name, i.item_option, i.item_price
+        FROM
+            items as i
+        INNER JOIN
+            category as c
+        ON
+            c.id = i.category
+        WHERE
+            i.admin_id = #{adminId};
+    </select>
+    <select id="itemDetail" resultType="AdminItemResponse">
+        SELECT
+            c.category_name, i.item_image, i.item_name, i.item_option, i.item_price, i.item_info, i.item_count
+        FROM
+            items AS i
+        INNER JOIN
+            category AS c
+        ON
+            i.category = c.id
+        WHERE
+            i.id = #{itemId} and i.admin_id = #{adminId};
+    </select>
+    <update id="updateItem">
+        UPDATE
+            items
+        SET
+            category = #{category}, item_image = #{itemImage}, item_name = #{itemName}, item_option = #{itemOption}, item_price = #{itemPrice}, item_info = #{itemInfo}, item_count = #{itemCount}
+        WHERE
+            id = #{itemId} AND admin_id = #{adminId}
+    </update>
 </mapper>

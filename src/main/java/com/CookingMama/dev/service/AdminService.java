@@ -4,6 +4,8 @@ import com.CookingMama.dev.domain.dto.AdminDTO;
 import com.CookingMama.dev.domain.dto.Items;
 import com.CookingMama.dev.domain.request.AdminLoginRequest;
 import com.CookingMama.dev.domain.request.AdminSignUpRequest;
+import com.CookingMama.dev.domain.request.AdminUpdateItemRequest;
+import com.CookingMama.dev.domain.response.AdminItemResponse;
 import com.CookingMama.dev.domain.response.AdminResponse;
 import com.CookingMama.dev.domain.response.StockManagementResponse;
 import com.CookingMama.dev.repository.AdminRepository;
@@ -39,5 +41,22 @@ public class AdminService {
             return adminLogin(new AdminLoginRequest(request.getAdminEmail(), request.getAdminPw()));
         }
         return null;
+    }
+
+    public List<AdminItemResponse> itemList(){
+        Integer adminId = securityService.tokenToAdminDTO(securityService.getToken()).getId();
+        return adminRepository.itemList(adminId);
+    }
+
+    public List<AdminItemResponse> itemDetail(Integer itemId){
+        Integer adminId = securityService.tokenToAdminDTO(securityService.getToken()).getId();
+        return adminRepository.itemDetail(adminId, itemId);
+    }
+
+    public Integer updateItem(AdminUpdateItemRequest request){
+        Integer adminId = securityService.tokenToAdminDTO(securityService.getToken()).getId();
+        request.setAdminId(adminId);
+        return adminRepository.updateItem(request);
+
     }
 }

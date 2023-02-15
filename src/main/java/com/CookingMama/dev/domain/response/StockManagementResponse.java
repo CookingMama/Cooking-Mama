@@ -6,19 +6,11 @@ import lombok.*;
 @Getter@Setter@ToString
 @AllArgsConstructor
 public class StockManagementResponse {
-
-    private String itemImage;
-    private Integer category;
+    private String categoryName;
     private String itemName;
     private String itemOption;
     private Integer itemPrice;
+    private String itemImage;
+    private String itemInfo;
     private Integer itemCount;
-    public StockManagementResponse(Items items){
-        this.itemImage = items.getItemImage();
-        this.category = items.getCategory();
-        this.itemName = items.getItemName();
-        this.itemOption = items.getItemOption();
-        this.itemPrice = items.getItemPrice();
-        this.itemCount = items.getItemCount();
-    }
 }
