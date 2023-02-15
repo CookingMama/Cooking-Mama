@@ -1,4 +1,4 @@
-package com.CookingMama.dev.domain.dto;
+package com.CookingMama.dev.domain.response;
 
 import lombok.*;
 
@@ -10,11 +10,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Orders {
-    private Integer id;
-    private Integer adminId;
-    private Integer itemId;
-    private Integer userId;
+public class OrderResponse {
+    private String adminName;
+    private String itemName;
     private Integer itemPrice;
     private Integer itemCount;
     private Integer itemDiscount;

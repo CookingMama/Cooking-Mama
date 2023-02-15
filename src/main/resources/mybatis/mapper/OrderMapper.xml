@@ -12,4 +12,19 @@
             #{r.itemTotalPrice}, #{r.orderNumber})
         </foreach>
     </insert>
+    <update id="cancelOrders">
+        UPDATE orders SET
+        status = 2
+        WHERE
+        order_number = #{orderNumber} AND user_id = #{userId}
+    </update>
+    <select id="myOrders" resultType="OrderResponse">
+        SELECT
+        a.admin_name, i.item_name, o.item_price, o.item_count, o.item_discount, o.item_total_price, o.order_number,
+        o.tracking_number, o.order_date, o.status
+        FROM orders as o
+        LEFT JOIN admin as a ON a.id = o.admin_id
+        LEFT JOIN items as i ON i.id = o.item_id
+        WHERE o.user_id = #{userId}
+    </select>
 </mapper>
